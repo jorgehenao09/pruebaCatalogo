@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Prueba Catalogo</string>
+    <string name="splash_nombre">Prueba Catálogo</string>
+    <string name="splash_mensaje_bienvenida">Preparando la aplicación, por favor espere.</string>
+    <string name="splash_version">V 1.X.X</string>
+    <string name="title_activity_main">Principal</string>
+    <string name="information_working">Estamos trabajando</string>
+    <string name="information_processing_request">Procesando su petición, NO cierre, por favor espere...</string>
+    <string name="title_items">Listado Cátalogo</string>
+    <string name="title_list">Lista</string>
+</resources>
