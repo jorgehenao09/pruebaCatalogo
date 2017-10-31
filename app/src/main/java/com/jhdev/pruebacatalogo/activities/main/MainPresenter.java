@@ -32,7 +32,7 @@ public class MainPresenter {
             public void onResponse(RedditResponse resultado) {
 
                 //Realiza las acciones necesarias para llenar el recycler con el listado de items
-                mView.fillData(resultado.getDataReddit().getChildren());
+                mView.fillData(mModel.getListData(resultado.getDataReddit().getChildren()));
 
                 //Oculta el mensaje de espera
                 mView.hideWaitMessage();

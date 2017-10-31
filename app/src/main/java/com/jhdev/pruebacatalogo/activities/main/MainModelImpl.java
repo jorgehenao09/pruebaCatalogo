@@ -4,10 +4,15 @@ import android.content.Context;
 import android.util.Log;
 
 import com.jhdev.pruebacatalogo.activities.main.interfaces.MainModel;
+import com.jhdev.pruebacatalogo.dto.Children;
+import com.jhdev.pruebacatalogo.dto.Data;
 import com.jhdev.pruebacatalogo.dto.RedditResponse;
 import com.jhdev.pruebacatalogo.services.CallbackRetrofitListener;
 import com.jhdev.pruebacatalogo.services.RedditService;
 import com.jhdev.pruebacatalogo.util.Util;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -65,5 +70,23 @@ public class MainModelImpl implements MainModel {
 
             }
         });
+    }
+
+    /**
+     * Retorna un listado de objetos Data
+     *
+     * @param childrens
+     * @return
+     */
+    @Override
+    public List<Data> getListData(List<Children> childrens) {
+        List<Data> dataList = new ArrayList<>();
+
+        //Se recorre el listado
+        for (Children children: childrens){
+            dataList.add(children.getData());
+        }
+
+        return dataList;
     }
 }

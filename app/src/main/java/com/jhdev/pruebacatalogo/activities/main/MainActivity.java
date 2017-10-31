@@ -1,14 +1,24 @@
 package com.jhdev.pruebacatalogo.activities.main;
 
 import android.Manifest;
+import android.app.Activity;
+import android.app.ActivityOptions;
+import android.content.Intent;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.jhdev.pruebacatalogo.R;
+import com.jhdev.pruebacatalogo.activities.details.DetailsActivity;
 import com.jhdev.pruebacatalogo.activities.main.interfaces.MainModel;
 import com.jhdev.pruebacatalogo.activities.main.interfaces.MainView;
+import com.jhdev.pruebacatalogo.adapters.RecyclerItemsAdapter;
 import com.jhdev.pruebacatalogo.core.BaseActivity;
 import com.jhdev.pruebacatalogo.dto.Children;
+import com.jhdev.pruebacatalogo.dto.Data;
 
 import java.util.Arrays;
 import java.util.List;
@@ -73,11 +83,11 @@ public class MainActivity extends BaseActivity implements MainView {
     /**
      * Metodo utilizado para modificar el adapter y mostrar los datos del recycler
      *
-     * @param children
+     * @param dataList
      */
     @Override
-    public void fillData(List<Children> children) {
-
+    public void fillData(List<Data> dataList) {
+        mRecyclerItems.setAdapter(new RecyclerItemsAdapter(dataList, getApplicationContext(), this));
     }
 
     /**
@@ -88,5 +98,19 @@ public class MainActivity extends BaseActivity implements MainView {
     @Override
     public void showMessageError(String errorMessage) {
         showDialogMessage(getString(R.string.title_list), errorMessage);
+    }
+
+    /**
+     * Metodo encargado de lanzar la actividad que muestra los detalles del item seleccionado
+     *
+     * @param data
+     */
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @Override
+    public void launchIntentDetails(Data data) {
+        final Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
+        intent.putExtra(DetailsActivity.PARAMETER_DATA,data);
+
+        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
     }
 }

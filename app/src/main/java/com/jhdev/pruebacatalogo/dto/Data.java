@@ -1,11 +1,14 @@
 package com.jhdev.pruebacatalogo.dto;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
 /**
  * Awesome Pojo Generator
  * */
-public class Data{
+public class Data implements Parcelable{
   @SerializedName("public_description")
   @Expose
   private String public_description;
@@ -38,7 +41,7 @@ public class Data{
   private Object user_is_subscriber;
   @SerializedName("icon_size")
   @Expose
-  private List<Size> icon_size;
+  private List<Object> icon_size;
   @SerializedName("id")
   @Expose
   private String id;
@@ -152,7 +155,7 @@ public class Data{
   private Boolean over18;
   @SerializedName("banner_size")
   @Expose
-  private List<Size> banner_size;
+  private List<Object> banner_size;
   @SerializedName("subreddit_type")
   @Expose
   private String subreddit_type;
@@ -161,7 +164,7 @@ public class Data{
   private Boolean collapse_deleted_comments;
   @SerializedName("header_size")
   @Expose
-  private List<Size> header_size;
+  private List<Object> header_size;
   @SerializedName("advertiser_category")
   @Expose
   private String advertiser_category;
@@ -189,7 +192,97 @@ public class Data{
   @SerializedName("hide_ads")
   @Expose
   private Boolean hide_ads;
-  public void setPublic_description(String public_description){
+
+    protected Data(Parcel in) {
+        public_description = in.readString();
+        key_color = in.readString();
+        submit_text_label = in.readString();
+        public_description_html = in.readString();
+        whitelist_status = in.readString();
+        id = in.readString();
+        byte tmpUser_flair_enabled_in_sr = in.readByte();
+        user_flair_enabled_in_sr = tmpUser_flair_enabled_in_sr == 0 ? null : tmpUser_flair_enabled_in_sr == 1;
+        byte tmpShow_media = in.readByte();
+        show_media = tmpShow_media == 0 ? null : tmpShow_media == 1;
+        if (in.readByte() == 0) {
+            created_utc = null;
+        } else {
+            created_utc = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            comment_score_hide_mins = null;
+        } else {
+            comment_score_hide_mins = in.readInt();
+        }
+        header_title = in.readString();
+        if (in.readByte() == 0) {
+            subscribers = null;
+        } else {
+            subscribers = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            created = null;
+        } else {
+            created = in.readInt();
+        }
+        display_name = in.readString();
+        byte tmpLink_flair_enabled = in.readByte();
+        link_flair_enabled = tmpLink_flair_enabled == 0 ? null : tmpLink_flair_enabled == 1;
+        banner_img = in.readString();
+        name = in.readString();
+        description_html = in.readString();
+        audience_target = in.readString();
+        submit_text = in.readString();
+        byte tmpAccounts_active_is_fuzzed = in.readByte();
+        accounts_active_is_fuzzed = tmpAccounts_active_is_fuzzed == 0 ? null : tmpAccounts_active_is_fuzzed == 1;
+        byte tmpAllow_images = in.readByte();
+        allow_images = tmpAllow_images == 0 ? null : tmpAllow_images == 1;
+        byte tmpPublic_traffic = in.readByte();
+        public_traffic = tmpPublic_traffic == 0 ? null : tmpPublic_traffic == 1;
+        description = in.readString();
+        title = in.readString();
+        display_name_prefixed = in.readString();
+        submission_type = in.readString();
+        byte tmpUser_sr_theme_enabled = in.readByte();
+        user_sr_theme_enabled = tmpUser_sr_theme_enabled == 0 ? null : tmpUser_sr_theme_enabled == 1;
+        byte tmpSpoilers_enabled = in.readByte();
+        spoilers_enabled = tmpSpoilers_enabled == 0 ? null : tmpSpoilers_enabled == 1;
+        byte tmpShow_media_preview = in.readByte();
+        show_media_preview = tmpShow_media_preview == 0 ? null : tmpShow_media_preview == 1;
+        lang = in.readString();
+        byte tmpAllow_discovery = in.readByte();
+        allow_discovery = tmpAllow_discovery == 0 ? null : tmpAllow_discovery == 1;
+        byte tmpOver18 = in.readByte();
+        over18 = tmpOver18 == 0 ? null : tmpOver18 == 1;
+        subreddit_type = in.readString();
+        byte tmpCollapse_deleted_comments = in.readByte();
+        collapse_deleted_comments = tmpCollapse_deleted_comments == 0 ? null : tmpCollapse_deleted_comments == 1;
+        advertiser_category = in.readString();
+        url = in.readString();
+        header_img = in.readString();
+        icon_img = in.readString();
+        submit_text_html = in.readString();
+        byte tmpWiki_enabled = in.readByte();
+        wiki_enabled = tmpWiki_enabled == 0 ? null : tmpWiki_enabled == 1;
+        byte tmpQuarantine = in.readByte();
+        quarantine = tmpQuarantine == 0 ? null : tmpQuarantine == 1;
+        byte tmpHide_ads = in.readByte();
+        hide_ads = tmpHide_ads == 0 ? null : tmpHide_ads == 1;
+    }
+
+    public static final Creator<Data> CREATOR = new Creator<Data>() {
+        @Override
+        public Data createFromParcel(Parcel in) {
+            return new Data(in);
+        }
+
+        @Override
+        public Data[] newArray(int size) {
+            return new Data[size];
+        }
+    };
+
+    public void setPublic_description(String public_description){
    this.public_description=public_description;
   }
   public String getPublic_description(){
@@ -249,10 +342,10 @@ public class Data{
   public Object getUser_is_subscriber(){
    return user_is_subscriber;
   }
-  public void setIcon_size(List<Size> icon_size){
+  public void setIcon_size(List<Object> icon_size){
    this.icon_size=icon_size;
   }
-  public List<Size> getIcon_size(){
+  public List<Object> getIcon_size(){
    return icon_size;
   }
   public void setId(String id){
@@ -477,10 +570,10 @@ public class Data{
   public Boolean getOver18(){
    return over18;
   }
-  public void setBanner_size(List<Size> banner_size){
+  public void setBanner_size(List<Object> banner_size){
    this.banner_size=banner_size;
   }
-  public List<Size> getBanner_size(){
+  public List<Object> getBanner_size(){
    return banner_size;
   }
   public void setSubreddit_type(String subreddit_type){
@@ -495,10 +588,10 @@ public class Data{
   public Boolean getCollapse_deleted_comments(){
    return collapse_deleted_comments;
   }
-  public void setHeader_size(List<Size> header_size){
+  public void setHeader_size(List<Object> header_size){
    this.header_size=header_size;
   }
-  public List<Size> getHeader_size(){
+  public List<Object> getHeader_size(){
    return header_size;
   }
   public void setAdvertiser_category(String advertiser_category){
@@ -555,4 +648,76 @@ public class Data{
   public Boolean getHide_ads(){
    return hide_ads;
   }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(public_description);
+        parcel.writeString(key_color);
+        parcel.writeString(submit_text_label);
+        parcel.writeString(public_description_html);
+        parcel.writeString(whitelist_status);
+        parcel.writeString(id);
+        parcel.writeByte((byte) (user_flair_enabled_in_sr == null ? 0 : user_flair_enabled_in_sr ? 1 : 2));
+        parcel.writeByte((byte) (show_media == null ? 0 : show_media ? 1 : 2));
+        if (created_utc == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(created_utc);
+        }
+        if (comment_score_hide_mins == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(comment_score_hide_mins);
+        }
+        parcel.writeString(header_title);
+        if (subscribers == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(subscribers);
+        }
+        if (created == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(created);
+        }
+        parcel.writeString(display_name);
+        parcel.writeByte((byte) (link_flair_enabled == null ? 0 : link_flair_enabled ? 1 : 2));
+        parcel.writeString(banner_img);
+        parcel.writeString(name);
+        parcel.writeString(description_html);
+        parcel.writeString(audience_target);
+        parcel.writeString(submit_text);
+        parcel.writeByte((byte) (accounts_active_is_fuzzed == null ? 0 : accounts_active_is_fuzzed ? 1 : 2));
+        parcel.writeByte((byte) (allow_images == null ? 0 : allow_images ? 1 : 2));
+        parcel.writeByte((byte) (public_traffic == null ? 0 : public_traffic ? 1 : 2));
+        parcel.writeString(description);
+        parcel.writeString(title);
+        parcel.writeString(display_name_prefixed);
+        parcel.writeString(submission_type);
+        parcel.writeByte((byte) (user_sr_theme_enabled == null ? 0 : user_sr_theme_enabled ? 1 : 2));
+        parcel.writeByte((byte) (spoilers_enabled == null ? 0 : spoilers_enabled ? 1 : 2));
+        parcel.writeByte((byte) (show_media_preview == null ? 0 : show_media_preview ? 1 : 2));
+        parcel.writeString(lang);
+        parcel.writeByte((byte) (allow_discovery == null ? 0 : allow_discovery ? 1 : 2));
+        parcel.writeByte((byte) (over18 == null ? 0 : over18 ? 1 : 2));
+        parcel.writeString(subreddit_type);
+        parcel.writeByte((byte) (collapse_deleted_comments == null ? 0 : collapse_deleted_comments ? 1 : 2));
+        parcel.writeString(advertiser_category);
+        parcel.writeString(url);
+        parcel.writeString(header_img);
+        parcel.writeString(icon_img);
+        parcel.writeString(submit_text_html);
+        parcel.writeByte((byte) (wiki_enabled == null ? 0 : wiki_enabled ? 1 : 2));
+        parcel.writeByte((byte) (quarantine == null ? 0 : quarantine ? 1 : 2));
+        parcel.writeByte((byte) (hide_ads == null ? 0 : hide_ads ? 1 : 2));
+    }
 }
