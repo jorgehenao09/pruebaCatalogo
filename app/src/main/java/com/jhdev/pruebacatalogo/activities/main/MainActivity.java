@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.jhdev.pruebacatalogo.adapters.RecyclerItemsAdapter;
 import com.jhdev.pruebacatalogo.core.BaseActivity;
 import com.jhdev.pruebacatalogo.dto.Children;
 import com.jhdev.pruebacatalogo.dto.Data;
+import com.jhdev.pruebacatalogo.util.TransitionHelper;
 
 import java.util.Arrays;
 import java.util.List;
@@ -105,12 +107,22 @@ public class MainActivity extends BaseActivity implements MainView {
      *
      * @param data
      */
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
-    public void launchIntentDetails(Data data) {
-        final Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
-        intent.putExtra(DetailsActivity.PARAMETER_DATA,data);
+    public void launchIntentDetails(Data data, View view) {
+        Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
+        intent.putExtra(DetailsActivity.PARAMETER_DATA, data);
 
-        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+
+            ActivityOptions options = ActivityOptions
+                    .makeSceneTransitionAnimation(this, view, "image_transition");
+            // start the new activity
+            startActivity(intent, options.toBundle());
+        }else {
+            startActivity(intent);
+        }
+
+
     }
+
 }

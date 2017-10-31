@@ -14,6 +14,11 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowContentTransitions" tools:targetApi="lollipop">true</item>
+        <item name="android:windowAllowEnterTransitionOverlap" tools:targetApi="lollipop">false</item>
+        <item name="android:windowAllowReturnTransitionOverlap" tools:targetApi="lollipop">true</item>
+        <item name="android:windowSharedElementEnterTransition" tools:targetApi="lollipop">@transition/change_image_transform</item>
+        <item name="android:windowSharedElementExitTransition" tools:targetApi="lollipop">@transition/change_image_transform</item>
     </style>
 
     <style name="PruebaTitleLabel" parent="@android:style/Widget.TextView">

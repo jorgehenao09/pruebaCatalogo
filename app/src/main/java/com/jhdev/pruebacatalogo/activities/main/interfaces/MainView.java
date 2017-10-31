@@ -1,5 +1,7 @@
 package com.jhdev.pruebacatalogo.activities.main.interfaces;
 
+import android.view.View;
+
 import com.jhdev.pruebacatalogo.core.BaseView;
 import com.jhdev.pruebacatalogo.dto.Children;
 import com.jhdev.pruebacatalogo.dto.Data;
@@ -31,5 +33,5 @@ public interface MainView extends BaseView{
      *
      * @param data
      */
-    void launchIntentDetails(Data data);
+    void launchIntentDetails(Data data, View view);
 }
